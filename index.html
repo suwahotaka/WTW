@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WTP - ワールド・タイプ・ウォー (完全統合版)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- ★以下の行を追加：QRコード生成ライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<div id="game-container">
+    <header>
+        <div class="stats">制圧国数: <span id="score">0</span> / <span id="total-count">0</span></div>
+        <div class="stats">残り時間: <span id="timer" class="timer">90</span></div>
+    </header>
+
+    <div id="map-area">
+        <svg id="world-map" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice"></svg>
+    </div>
+
+    <div id="control-panel">
+        <div id="target-info">
+            <div id="mode-badge" class="hidden">首都名を入力</div>
+            <div id="target-jp">WTP</div>
+            <div id="target-romaji-hint">WORLD TYPE WAR</div>
+        </div>
+        <input type="text" id="type-input" placeholder="ローマ字で入力してください" autocomplete="off" disabled>
+    </div>
+
+    <!-- スタート画面 -->
+    <div id="start-screen" class="overlay">
+        <h1>W.T.P.</h1>
+        <div class="subtitle">世界タイピング大戦 - 完全統合版</div>
+        <p>勢力と開始国を選択してください</p>
+        
+        <div class="faction-select">
+            <div class="card sea">
+                <h3 style="color:var(--sea-color)">SEA POWER (海洋)</h3>
+                <small>海沿いの国：国名のみ<br>内陸の国：国名＋首都</small>
+                <div style="margin-top:10px;">
+                    <button class="btn-start" data-faction="sea" data-country="Japan">日本 (Nihon)</button>
+                    <button class="btn-start" data-faction="sea" data-country="USA">アメリカ (Amerika)</button>
+                    <button class="btn-start" data-faction="sea" data-country="UK">イギリス (Igirisu)</button>
+                </div>
+            </div>
+            <div class="card land">
+                <h3 style="color:var(--land-color)">LAND POWER (大陸)</h3>
+                <small>内陸の国：国名のみ<br>海沿いの国：国名＋首都</small>
+                <div style="margin-top:10px;">
+                    <button class="btn-start" data-faction="land" data-country="Russia">ロシア (Roshia)</button>
+                    <button class="btn-start" data-faction="land" data-country="China">中国 (Chuugoku)</button>
+                    <button class="btn-start" data-faction="land" data-country="Germany">ドイツ (Doitsu)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- リザルト画面 -->
+    <div id="result-screen" class="overlay hidden">
+        <h1 id="result-title">TIME UP</h1>
+        <p>最終制圧国数: <span id="final-score">0</span></p>
+        <!-- ハイスコア表示を追加 -->
+        <p id="high-score-display" style="color:#f1c40f; font-weight:bold; margin-top:-10px;">ハイスコア: -</p>
+        
+        <p id="result-msg" style="margin-bottom:20px; font-weight:bold;"></p>
+        
+        <!-- 地図保存ボタンを追加 -->
+        <button id="btn-save-map" class="btn-start" style="padding:10px 30px; width:auto; margin-bottom:10px; background:#3498db;">
+            地図を画像で保存
+        </button>
+
+        <button class="btn-start" style="padding:15px 30px; width:auto;" onclick="location.reload()">タイトルに戻る</button>
+    </div>
+
+
+
+
+</div>
+
+<!-- JSの読み込み順序が重要です -->
+<!-- 1. データ定義 -->
+<script src="js/data.js"></script>
+<!-- 2. 音声処理 -->
+<script src="js/audio.js"></script>
+<!-- 3. メインロジック (データと音声を使うため最後に) -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
