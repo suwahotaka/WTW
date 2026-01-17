@@ -42,6 +42,19 @@ document.body.addEventListener('click', () => {
     }
 }, { once: true });
 
+// initMap()の後に追加
+function optimizeForMobile() {
+    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        el.input.addEventListener('focus', () => {
+            setTimeout(() => {
+                el.input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300); // キーボード出現後のスクロール
+        });
+    }
+}
+// initMap()の最後に呼び出し: optimizeForMobile();
+
+
 function startGame(faction, startId) {
     SoundFX.init();
     SoundFX.playBGM('normal');
@@ -295,5 +308,6 @@ document.querySelectorAll('.btn-start').forEach(b => {
 });
 
 document.getElementById('btn-save-map').addEventListener('click', saveMapImage);
+
 
 initMap();
